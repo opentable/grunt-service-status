@@ -1,0 +1,38 @@
+{
+  "name": "grunt-service-status",
+  "version": "0.1.0",
+  "description": "hit the service-status endpoint to verify deployment",
+  "main": "Gruntfile.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:andyroyle/grunt-service-status.git"
+  },
+  "keywords": [
+    "grunt",
+    "service-status",
+    "verify"
+  ],
+  "author": "Andy Royle <ajroyle@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andyroyle/grunt-service-status/issues"
+  },
+  "homepage": "https://github.com/andyroyle/grunt-service-status",
+  "devDependencies": {
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-cli": "^0.1.13",
+    "grunt": "^0.4.4"
+  },
+  "dependencies": {
+    "request": "^2.34.0"
+  },
+  "peerDependencies": {
+    "grunt": "^0.4.4"
+  }
+}
