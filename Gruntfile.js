@@ -30,6 +30,12 @@ module.exports = function(grunt) {
                     warmUp: true,
                     waitAfterWarmUp: 1000
                 }
+            },
+            'case-sensitive': {
+                options: {
+                    url: 'http://127.0.0.1:8888/case-sensitive',
+                    warmUp: false
+                }
             }
         }
     });

@@ -4,11 +4,13 @@ module.exports = function(grunt){
     var verify = function(serviceStatus){
         for(var i = 0; i < serviceStatus.length; i++){
             var s = serviceStatus[i];
-            if(!s.status || s.status === 'Failed'){
-                grunt.log.error(s.monitorname + ': ' + s.status + ' (' + s.response + ')');
+            var status = (s.status || s.Status || "").toLowerCase();
+
+            if(!status || status === 'failed'){
+                grunt.log.error(s.monitorname + ': ' + status + ' (' + s.response + ')');
                 grunt.fail.fatal('failed service-status check: ' + JSON.stringify(s));
             }
-            grunt.log.ok(s.monitorname + ': ' + s.status + ' (' + s.response + ')');
+            grunt.log.ok(s.monitorname + ': ' + status + ' (' + s.response + ')');
         }
     };
 
