@@ -5,12 +5,13 @@ module.exports = function(grunt){
         for(var i = 0; i < serviceStatus.length; i++){
             var s = serviceStatus[i];
             var status = (s.status || s.Status || "").toLowerCase();
+            var monitorName = (s.monitorname || s.MonitorName);
 
             if(!status || status === 'failed'){
-                grunt.log.error(s.monitorname + ': ' + status + ' (' + s.response + ')');
+                grunt.log.error(monitorName + ': ' + status + ' (' + s.response + ')');
                 grunt.fail.fatal('failed service-status check: ' + JSON.stringify(s));
             }
-            grunt.log.ok(s.monitorname + ': ' + status + ' (' + s.response + ')');
+            grunt.log.ok(monitorName + ': ' + status + ' (' + s.response + ')');
         }
     };
 
