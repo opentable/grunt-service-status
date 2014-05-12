@@ -17,8 +17,8 @@ module.exports = function(grunt) {
                 options: {
                     baseUrl: 'http://127.0.0.1:8888/success',
                     monitors:[
-                        { monitorname: 'my-test-monitor'   },
-                        { monitorname: 'my-test-monitor-2' }
+                        'my-test-monitor',
+                        'my-test-monitor-2'
                     ]
                 }
             },
@@ -26,8 +26,8 @@ module.exports = function(grunt) {
                 options: {
                     baseUrl: 'http://127.0.0.1:8888/warmUp',
                     monitors:[
-                        { monitorname: 'my-test-monitor'   },
-                        { monitorname: 'my-test-monitor-2' }
+                        'my-test-monitor',
+                        'my-test-monitor-2'
                     ],
                     warmUp: true
                 }
@@ -36,8 +36,8 @@ module.exports = function(grunt) {
                 options: {
                     baseUrl: 'http://127.0.0.1:8888/warmUp',
                     monitors:[
-                        { monitorname: 'my-test-monitor'   },
-                        { monitorname: 'my-test-monitor-2' }
+                        'my-test-monitor',
+                        'my-test-monitor-2'
                     ],
                     warmUp: true,
                     waitAfterWarmUp: 1000
@@ -47,10 +47,19 @@ module.exports = function(grunt) {
                 options: {
                     baseUrl: 'http://127.0.0.1:8888/case-sensitive',
                     monitors:[
-                        { monitorname: 'my-test-monitor'   },
-                        { monitorname: 'my-test-monitor-2' }
+                        'my-test-monitor',
+                        'my-test-monitor-2'
                     ],
                     warmUp: false
+                }
+            },
+            'monitor-object': {
+                options: {
+                    baseUrl: 'http://127.0.0.1:8888/success',
+                    monitors:[
+                        { monitorname: 'my-test-monitor'   },
+                        { monitorname: 'my-test-monitor-2' }
+                    ]
                 }
             }
         }

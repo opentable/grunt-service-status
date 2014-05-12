@@ -26,8 +26,12 @@ module.exports = function(grunt){
 
     var warmUp = function(options, callback){
         var res = {};
+
+        var url = buildUrl(options.baseUrl, (options.monitors[0].monitorname || options.monitors[0]));
+
         try{
-            res = request(buildUrl(options.baseUrl, options.monitors[0].monitorname));
+            grunt.verbose.writeln('[WarmUp] Making request: ' + url);
+            res = request();
         }
         catch(err){
             grunt.verbose.writeln('[WarmUp]' + JSON.stringify(err));
@@ -47,7 +51,7 @@ module.exports = function(grunt){
     var execute = function(options, done){
 
         options.monitors.forEach(function(m){
-            verify(buildUrl(options.baseUrl, m.monitorname));
+            verify(buildUrl(options.baseUrl, m.monitorname || m));
         });
 
         done();
