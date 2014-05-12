@@ -1,55 +1,63 @@
 module.exports = function(grunt){
-    var request = require('request');
+    var request = require('request-sync');
 
-    var verify = function(serviceStatus){
-        for(var i = 0; i < serviceStatus.length; i++){
-            var s = serviceStatus[i];
-            var status = (s.status || s.Status || "").toLowerCase();
-            var monitorName = (s.monitorname || s.MonitorName);
+    var buildUrl = function(baseUrl, monitorName){
+        return baseUrl + '/' + monitorName;
+    };
 
-            if(!status || status === 'failed'){
-                grunt.log.error(monitorName + ': ' + status + ' (' + s.response + ')');
-                grunt.fail.fatal('failed service-status check: ' + JSON.stringify(s));
-            }
-            grunt.log.ok(monitorName + ': ' + status + ' (' + s.response + ')');
+    var verify = function(url){
+        grunt.verbose.writeln('Making request: ' + url);
+        var res = request(url);
+        if(res.statusCode !== 200){
+            grunt.warn('status code was: ' + res.statusCode);
         }
+
+        var body = JSON.parse(res.body);
+
+        var status = (body.status || body.Status || "").toLowerCase();
+        var monitorName = (body.monitorname || body.MonitorName);
+
+        if(!status || status === 'failed'){
+            grunt.log.error(monitorName + ': ' + status + ' (' + body.response + ')');
+            grunt.fail.fatal('failed service-status check: ' + JSON.stringify(body));
+        }
+        grunt.log.ok(monitorName + ': ' + status + ' (' + body.response + ')');
     };
 
     var warmUp = function(options, callback){
-        request(options.url, function(err, res, body){
-            if(err){
-                grunt.verbose.writeln('[WarmUp] ' + JSON.stringify(err));
-            }
-            if(res.statusCode){
-                grunt.verbose.writeln('[WarmUp] statusCode: ' + res.statusCode);
-            }
-            if(body){
-                grunt.verbose.writeln('[WarmUp] ' + body);
-            }
+        var res = {};
+        try{
+            res = request(buildUrl(options.baseUrl, options.monitors[0].monitorname));
+        }
+        catch(err){
+            grunt.verbose.writeln('[WarmUp]' + JSON.stringify(err));
+        }
 
-            setTimeout(callback, options.waitAfterWarmUp);
-        });
+        if(res.statusCode){
+            grunt.verbose.writeln('[WarmUp] statusCode: ' + res.statusCode);
+        }
+
+        if(res.body){
+            grunt.verbose.writeln('[WarmUp] ' + res.body);
+        }
+
+        setTimeout(callback, options.waitAfterWarmUp);
     };
 
     var execute = function(options, done){
-        request(options.url, function(err, res, body){
-            if(err){
-                grunt.fail.fatal(err);
-            }
 
-            if(res.statusCode !== 200){
-                grunt.warn('status code was: ' + res.statusCode);
-            }
-
-            verify(JSON.parse(body));
-
-            done();
+        options.monitors.forEach(function(m){
+            verify(buildUrl(options.baseUrl, m.monitorname));
         });
+
+        done();
     };
 
     grunt.registerMultiTask('service-status', function(){
         var done = this.async();
         var options = this.options({
+            baseUrl: 'http://127.0.0.1/service-status/',
+            monitors: [],
             warmUp: false,
             waitAfterWarmUp: 0
         });

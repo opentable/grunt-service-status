@@ -27,10 +27,11 @@
   "devDependencies": {
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-cli": "^0.1.13",
-    "grunt": "^0.4.4"
+    "grunt": "^0.4.4",
+    "grunt-http": "^1.4.0"
   },
   "dependencies": {
-    "request": "^2.34.0"
+    "request-sync": "0.0.5"
   },
   "peerDependencies": {
     "grunt": "^0.4.4"
