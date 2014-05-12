@@ -13,11 +13,21 @@ usage:
 grunt.initConfig({
   'service-status':{
     'myservice': {
-        options: {
-          url: 'http://my.service.com/service-status'
-          warmUp: true,
-          waitAfterWarmUp: 2000
-        }
+      options: {
+        baseUrl: 'http://my.service.com/service-status',
+        monitors: ['my-test-monitor', 'my-test-monitor-2'],
+        warmUp: true,
+        waitAfterWarmUp: 2000
+      }
+    },
+    'myservice-alt': {
+      options: {
+        baseUrl: 'http://my.service.com/service-status',
+        monitors: [
+          { monitorname: 'my-test-monitor'   },
+          { monitorname: 'my-test-monitor-2' }
+        ]
+      }
     }
   }
 });
