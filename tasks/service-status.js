@@ -27,11 +27,11 @@ module.exports = function(grunt){
     var warmUp = function(options, callback){
         var res = {};
 
-        var url = buildUrl(options.baseUrl, (options.monitors[0].monitorname || options.monitors[0]));
+        var url = options.baseUrl;
 
         try{
             grunt.verbose.writeln('[WarmUp] Making request: ' + url);
-            res = request();
+            res = request(url);
         }
         catch(err){
             grunt.verbose.writeln('[WarmUp]' + JSON.stringify(err));
