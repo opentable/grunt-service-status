@@ -24,7 +24,7 @@ module.exports = function(grunt){
         grunt.log.ok(monitorName + ': ' + status + ' (' + body.response + ')');
     };
 
-    var warmUp = function(options, callback){
+    var warmUp = function(options){
         var res = {};
 
         var url = options.baseUrl;
@@ -44,8 +44,6 @@ module.exports = function(grunt){
         if(res.body){
             grunt.verbose.writeln('[WarmUp] ' + res.body);
         }
-
-        setTimeout(callback, options.waitAfterWarmUp);
     };
 
     var execute = function(options, done){
@@ -62,19 +60,18 @@ module.exports = function(grunt){
         var options = this.options({
             baseUrl: 'http://127.0.0.1/service-status/',
             monitors: [],
-            warmUp: false,
+            warmUps: 0,
             waitAfterWarmUp: 0
         });
-
+        
         grunt.verbose.writeflags(options);
+        
+        for(var i=0; i<options.warmUps; i++){
+           warmUp(options);
+        }
 
-        if(options.warmUp){
-            warmUp(options, function(){
-                execute(options, done);
-            });
-        }
-        else{
+        setTimeout(function(){
             execute(options, done);
-        }
+        }, options.waitAfterWarmUp);
     });
 };

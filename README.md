@@ -16,7 +16,7 @@ grunt.initConfig({
       options: {
         baseUrl: 'http://my.service.com/service-status',
         monitors: ['my-test-monitor', 'my-test-monitor-2'],
-        warmUp: true,
+        warmUps: 2,
         waitAfterWarmUp: 2000
       }
     },
@@ -31,3 +31,10 @@ grunt.initConfig({
     }
   }
 });
+
+options:
+
+`baseUrl`: the service-status root url
+`monitors`: either a list of monitor names to hit, or a list of objects with a monitorname property
+`warmUps`: the number of times to hit the root url before starting the verify step (default 0)
+`waitAfterWarmUp`: number of milliseconds to wait after the warm-ups (default 0)

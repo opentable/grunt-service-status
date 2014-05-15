@@ -29,7 +29,7 @@ module.exports = function(grunt) {
                         'my-test-monitor',
                         'my-test-monitor-2'
                     ],
-                    warmUp: true
+                    warmUps: 3
                 }
             },
             'warmUp-with-wait': {
@@ -39,7 +39,7 @@ module.exports = function(grunt) {
                         'my-test-monitor',
                         'my-test-monitor-2'
                     ],
-                    warmUp: true,
+                    warmUps: 1,
                     waitAfterWarmUp: 1000
                 }
             },
@@ -49,8 +49,7 @@ module.exports = function(grunt) {
                     monitors:[
                         'my-test-monitor',
                         'my-test-monitor-2'
-                    ],
-                    warmUp: false
+                    ]
                 }
             },
             'monitor-object': {
