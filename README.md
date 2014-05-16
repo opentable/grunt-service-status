@@ -37,4 +37,5 @@ options:
 `baseUrl`: the service-status root url
 `monitors`: either a list of monitor names to hit, or a list of objects with a monitorname property
 `warmUps`: the number of times to hit the root url before starting the verify step (default 0)
+`warmUpUrl`: optionally specify a different url to use for the warm-up. If not specified it'll use the baseUrl
 `waitAfterWarmUp`: number of milliseconds to wait after the warm-ups (default 0)

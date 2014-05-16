@@ -27,7 +27,7 @@ module.exports = function(grunt){
     var warmUp = function(options){
         var res = {};
 
-        var url = options.baseUrl;
+        var url = options.warmUpUrl || options.baseUrl;
 
         try{
             grunt.verbose.writeln('[WarmUp] Making request: ' + url);

@@ -32,6 +32,17 @@ module.exports = function(grunt) {
                     warmUps: 3
                 }
             },
+            'warmUp-with-alternate-url': {
+                options: {
+                    baseUrl: 'http://127.0.0.1:8888/warmUp',
+                    warmUpUrl: 'http://127.0.0.1:8888/altWarmUp',
+                    monitors:[
+                        'my-test-monitor',
+                        'my-test-monitor-2'
+                    ],
+                    warmUps: 1
+                }
+            },
             'warmUp-with-wait': {
                 options: {
                     baseUrl: 'http://127.0.0.1:8888/warmUp',

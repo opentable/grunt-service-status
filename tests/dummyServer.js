@@ -29,6 +29,14 @@ var http = require("http"),
                 "time": 1234 
             }
         },
+        'altWarmUp': {
+            'my-alt-monitor': {
+                "status": "Ok",
+                "monitorname": "my-test-monitor",
+                "response": 200,
+                "time": 1234
+            },
+        },
         'case-sensitive': {
             'my-test-monitor': { 
                  "Status": "OK", 
@@ -53,12 +61,10 @@ var server = http.createServer(function(request, response) {
     }
 
     var bits = request.url.split('/');
-    var result = serviceStatus[bits[1]][bits[2]];
+    var result = serviceStatus[bits[1]]
+    result = bits[2] ? result[bits[2]] : result;
 
-    if(bits[1] === 'warmUp' && !bits[2] ){
-        result = serviceStatus.warmUp;
-    }
-    else if(bits[1] === 'warmUp'){
+    if(bits[1] === 'warmUp' && bits[2]){
         result = serviceStatus.success[bits[2]];
     }
 
