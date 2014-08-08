@@ -7,7 +7,13 @@ module.exports = function(grunt){
 
     var verify = function(url){
         grunt.verbose.writeln('Making request: ' + url);
-        var res = request(url);
+        var res = request({
+            url: url,
+            headers: {
+                'user-agent': 'grunt-service-status'
+            }
+        });
+
         if(res.statusCode !== 200){
             grunt.warn('status code was: ' + res.statusCode);
         }
@@ -31,7 +37,12 @@ module.exports = function(grunt){
 
         try{
             grunt.verbose.writeln('[WarmUp] Making request: ' + url);
-            res = request(url);
+            res = request({
+                url: url,
+                headers: {
+                    'user-agent': 'grunt-service-status'
+                }
+            });
         }
         catch(err){
             grunt.verbose.writeln('[WarmUp]' + JSON.stringify(err));
