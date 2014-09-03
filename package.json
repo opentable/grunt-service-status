@@ -1,6 +1,6 @@
 {
   "name": "grunt-service-status",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "hit the service-status endpoint to verify deployment",
   "main": "Gruntfile.js",
   "directories": {
@@ -30,7 +30,8 @@
     "grunt": "^0.4.4"
   },
   "dependencies": {
-    "request-sync": "0.0.5"
+    "async": "^0.9.0",
+    "request": "^2.40.0"
   },
   "peerDependencies": {
     "grunt": "^0.4.4"
