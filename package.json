@@ -1,6 +1,6 @@
 {
   "name": "grunt-service-status",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "hit the service-status endpoint to verify deployment",
   "main": "Gruntfile.js",
   "directories": {
