@@ -15,6 +15,7 @@
   },
   "keywords": [
     "grunt",
+    "gruntplugin",
     "service-status",
     "verify"
   ],
